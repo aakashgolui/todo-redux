@@ -15,10 +15,12 @@ class AddForm extends React.Component{
         e.preventDefault();
         const content = this.state.content;
         const isFav = false
+        const editing = false
         const data = {
             id: this.generateOTP(),
             content,
-            isFav
+            isFav,
+            editing
         }
         console.log(data)
         this.props.dispatch({

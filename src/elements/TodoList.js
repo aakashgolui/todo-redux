@@ -1,24 +1,38 @@
 import React from 'react';
 
-const Todos = ({ posts, deleteTodo }) => {
+const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, onToggleFav }) => {
     
     const todoList = posts.length 
     ? 
         (
             posts.map((todo)=>{
                 return(
-                    <li className="collection-item avatar" key={todo.id}>
-                        {/* <img src={require('../assets/img/placeholder.jpg')} alt="" className="circle" /> */}
-                        <span className="title">#{todo.id}</span>
-                        <p>{todo.content}</p>
-                        <a href="#!" className={todo.isFav ? 'secondary-content yellow-text' : 'secondary-content grey-text'}>
-                            <i className="material-icons">grade</i>
-                        </a>
-                        <br />
-                        <a href="#!" className="red-text" onClick={()=>deleteTodo(todo.id)}>
-                            <i className="material-icons">delete</i>
-                        </a>
-                    </li>
+                    !todo.editing
+                    ?
+                        <li className="collection-item avatar" key={todo.id}>
+                            <img  alt="" className="circle" />
+                            <span className="title">#{todo.id}</span>
+                            <p>{todo.content}</p>
+                            <a href="#!" onClick={()=> onToggleFav(todo.id)} className={todo.isFav ? 'secondary-content yellow-text' : 'secondary-content grey-text'}>
+                                <i className="material-icons">grade</i>
+                            </a>
+                            <br />
+                            <a href="#!" className="red-text" onClick={()=>deleteTodo(todo.id)}>
+                                <i className="material-icons">delete</i>
+                            </a>
+                            <a href="#!" className="blue-text" onClick={()=>toggleEdit(todo.id)}>
+                                <i className="material-icons">edit</i>
+                            </a>
+                        </li>
+                    :
+                        <li className="collection-item avatar" key={todo.id}>
+                            <img  alt="" className="circle" />
+                            <span className="title">#{todo.id}</span>
+                            <form onSubmit={()=>handleSubmitEdit(todo.id)}>
+                                <label>Todo content:</label>
+                                <input type="text" defaultValue={todo.content} onChange={(input) => handleChange(input)}/>
+                            </form>
+                        </li>
                 ) 
                 
             })
