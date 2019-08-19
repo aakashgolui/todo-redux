@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, onToggleFav }) => {
+const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, onToggleFav , onFocusInput }) => {
     
     const todoList = posts.length 
     ? 
@@ -10,7 +10,6 @@ const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, 
                     !todo.editing
                     ?
                         <li className="collection-item avatar" key={todo.id}>
-                            <img  alt="" className="circle" />
                             <span className="title">#{todo.id}</span>
                             <p>{todo.content}</p>
                             <a href="#!" onClick={()=> onToggleFav(todo.id)} className={todo.isFav ? 'secondary-content yellow-text' : 'secondary-content grey-text'}>
@@ -30,7 +29,7 @@ const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, 
                             <span className="title">#{todo.id}</span>
                             <form onSubmit={()=>handleSubmitEdit(todo.id)}>
                                 <label>Todo content:</label>
-                                <input type="text" defaultValue={todo.content} onChange={(input) => handleChange(input)}/>
+                                <input type="text" defaultValue={todo.content} onFocus={(text) => onFocusInput(text)} onChange={(input) => handleChange(input)}/>
                             </form>
                         </li>
                 ) 

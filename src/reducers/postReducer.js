@@ -23,6 +23,7 @@ const postReducer = (state = posts, action) => {
               })
         case 'TOGGLE_FAV':
             return state.map((post) => post.id === action.id ? {...post, isFav: !post.isFav} : post)
+        // case 'TOGGLE_COMPLETE':
         default:
           return state;
     }
