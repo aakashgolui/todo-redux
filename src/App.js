@@ -7,10 +7,13 @@ class App extends React.Component{
     content:''
   }
   deleteTodo = (id) => {
-    this.props.dispatch({
-      type: 'DELETE_POST',
-      id:id
-    })
+    let result = window.confirm("Want to delete?");
+    if(result){
+      this.props.dispatch({
+        type: 'DELETE_POST',
+        id:id
+      })
+    }
   }
 
   toggleEdit = (id) => {
@@ -50,6 +53,7 @@ class App extends React.Component{
   onToggleComplete = (id) => {
     this.props.dispatch({ type: 'TOGGLE_COMPLETE', id:id})
   }
+
   
   render(){
     return(
@@ -60,7 +64,7 @@ class App extends React.Component{
         <Suspense fallback={<h3 className="center">Loading...</h3>}>
           <h3 className="center blue-text">Todo App</h3>
           <AddForm />
-          <p className="grey-text center">Total: ({this.props.posts.length}), Complete: ({this.props.posts.filter((post) => post.isComplete).length}), Fav: ({this.props.posts.filter((post) => post.isFav).length})</p>
+          <p className="grey-text center">Total: ({this.props.posts.length}), Active: ({this.props.posts.filter((post) => !post.isComplete).length}), Complete: ({this.props.posts.filter((post) => post.isComplete).length}), favourite: ({this.props.posts.filter((post) => post.isFav).length})</p>
           {/* <h4 className="center blue-text">Todo's</h4> */}
           
           <Todos posts={this.props.posts} deleteTodo={this.deleteTodo} onToggleFav={this.onToggleFav} onFocusInput={this.onFocusInput} onToggleComplete={this.onToggleComplete} toggleEdit={this.toggleEdit} handleChange={this.handleChange} handleSubmitEdit={this.handleSubmitEdit}/>

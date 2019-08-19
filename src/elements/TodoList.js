@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './TodoList.css';
 const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, onToggleFav , onFocusInput, onToggleComplete }) => {
     
     const todoList = posts.length 
@@ -9,17 +9,17 @@ const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, 
                 return(
                     !todo.editing
                     ?
-                        <li className="collection-item avatar" key={todo.id}>
+                        <li className="collection-item avatar listOpacity" key={todo.id}>
 
                             {
                                 todo.isComplete
                                 ?
-                                <a href="#!" onClick={()=>onToggleComplete(todo.id)}>
-                                    <i class="material-icons circle green">verified_user</i>
+                                <a href="#!" onClick={()=>onToggleComplete(todo.id)} title="Active Todo">
+                                    <i className="material-icons circle green completeBtn">verified_user</i>
                                 </a>
                                 :
-                                <a href="#!" onClick={()=>onToggleComplete(todo.id)}>
-                                    <i class="material-icons circle orange">indeterminate_check_box</i>
+                                <a href="#!" onClick={()=>onToggleComplete(todo.id)} title="Complete Todo">
+                                    <i className="material-icons circle orange completeBtn">indeterminate_check_box</i>
                                 </a>
                             }
                             <span className="title"># {index + 1}</span>
@@ -43,7 +43,7 @@ const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, 
                         </li>
                     :
                         <li className="collection-item avatar" key={todo.id}>
-                            <i class="material-icons circle red">cancel</i>
+                            <i className="material-icons circle red">cancel</i>
                             <span className="title">#{todo.id}</span>
                             <form onSubmit={()=>handleSubmitEdit(todo.id)}>
                                 <label>Todo content:</label>

@@ -1,10 +1,4 @@
-const posts = [
-    {id:1, content:'delectus aut autem', isFav:false, editing:false, isComplete:false},
-    {id:2, content:'quis ut nam facilis et officia qui', isFav:true, editing:false, isComplete:false},
-    {id:3, content:'fugiat veniam minus', isFav:false, editing:false, isComplete:false},
-    {id:4, content:'laboriosam mollitia et enim quasi adipisci quia provident illum', isFav:false, editing:false, isComplete:false},
-    {id:5, content:'illo expedita consequatur quia in', isFav:false, editing:false, isComplete:false}
-]
+
 const postReducer = (state = posts, action) => {
     switch(action.type) {
         case 'ADD_POST':
@@ -32,3 +26,12 @@ const postReducer = (state = posts, action) => {
     }
 }
 export default postReducer;
+
+
+const posts = [
+    {id:1, content:'delectus aut autem', isFav:false, editing:false, isComplete:false},
+    {id:2, content:'quis ut nam facilis et officia qui', isFav:true, editing:false, isComplete:false},
+    {id:3, content:'fugiat veniam minus', isFav:false, editing:false, isComplete:false},
+    {id:4, content:'laboriosam mollitia et enim quasi adipisci quia provident illum', isFav:false, editing:false, isComplete:false},
+    {id:5, content:'illo expedita consequatur quia in', isFav:false, editing:false, isComplete:false}
+]
