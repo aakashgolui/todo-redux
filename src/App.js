@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{Suspense} from 'react';
+import { connect } from 'react-redux';
+const Todos = React.lazy(() => import('./elements/TodoList'));
+const AddForm = React.lazy(() => import('./elements/TodoForm'));
+class App extends React.Component{
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  deleteTodo = (id) => {
+    console.log(id);
+    this.props.dispatch({
+      type: 'DELETE_POST',
+      id:id
+    })
+  }
+  
+  render(){
+    return(
+      <div className="container">
+        <h3 className="center blue-text">Todo's</h3>
+        <Suspense fallback={<h3 className="center">Loading...</h3>}>
+          <Todos posts={this.props.posts} deleteTodo={this.deleteTodo}/>
+          <AddForm />
+        </Suspense>
+      </div>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      posts: state
+  }
+}
+
+export default connect(mapStateToProps)(App);
