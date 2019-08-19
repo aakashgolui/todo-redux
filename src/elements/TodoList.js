@@ -1,17 +1,35 @@
 import React from 'react';
 
-const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, onToggleFav , onFocusInput }) => {
+const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, onToggleFav , onFocusInput, onToggleComplete }) => {
     
     const todoList = posts.length 
     ? 
         (
-            posts.map((todo)=>{
+            posts.map((todo, index)=>{
                 return(
                     !todo.editing
                     ?
                         <li className="collection-item avatar" key={todo.id}>
-                            <span className="title">#{todo.id}</span>
-                            <p>{todo.content}</p>
+
+                            {
+                                todo.isComplete
+                                ?
+                                <a href="#!" onClick={()=>onToggleComplete(todo.id)}>
+                                    <i class="material-icons circle green">verified_user</i>
+                                </a>
+                                :
+                                <a href="#!" onClick={()=>onToggleComplete(todo.id)}>
+                                    <i class="material-icons circle orange">indeterminate_check_box</i>
+                                </a>
+                            }
+                            <span className="title"># {index + 1}</span>
+                            {
+                                todo.isComplete
+                                ?
+                                <p><strike>{todo.content}</strike></p>
+                                :
+                                <p>{todo.content}</p>
+                            }
                             <a href="#!" onClick={()=> onToggleFav(todo.id)} className={todo.isFav ? 'secondary-content yellow-text' : 'secondary-content grey-text'}>
                                 <i className="material-icons">grade</i>
                             </a>
@@ -25,7 +43,7 @@ const Todos = ({ posts, deleteTodo, toggleEdit, handleSubmitEdit, handleChange, 
                         </li>
                     :
                         <li className="collection-item avatar" key={todo.id}>
-                            <img  alt="" className="circle" />
+                            <i class="material-icons circle red">cancel</i>
                             <span className="title">#{todo.id}</span>
                             <form onSubmit={()=>handleSubmitEdit(todo.id)}>
                                 <label>Todo content:</label>

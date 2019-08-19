@@ -16,11 +16,13 @@ class AddForm extends React.Component{
         const content = this.state.content;
         const isFav = false
         const editing = false
+        const isComplete = false
         const data = {
             id: this.generateOTP(),
             content,
             isFav,
-            editing
+            editing,
+            isComplete
         }
         console.log(data)
         this.props.dispatch({

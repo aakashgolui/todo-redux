@@ -1,7 +1,9 @@
 const posts = [
-    {id:1, content:'Create Store', isFav:false, editing:false},
-    {id:2, content:'Create reducers', isFav:true, editing:false},
-    {id:3, content:'Create actions', isFav:false, editing:false},
+    {id:1, content:'delectus aut autem', isFav:false, editing:false, isComplete:false},
+    {id:2, content:'quis ut nam facilis et officia qui', isFav:true, editing:false, isComplete:false},
+    {id:3, content:'fugiat veniam minus', isFav:false, editing:false, isComplete:false},
+    {id:4, content:'laboriosam mollitia et enim quasi adipisci quia provident illum', isFav:false, editing:false, isComplete:false},
+    {id:5, content:'illo expedita consequatur quia in', isFav:false, editing:false, isComplete:false}
 ]
 const postReducer = (state = posts, action) => {
     switch(action.type) {
@@ -23,7 +25,8 @@ const postReducer = (state = posts, action) => {
               })
         case 'TOGGLE_FAV':
             return state.map((post) => post.id === action.id ? {...post, isFav: !post.isFav} : post)
-        // case 'TOGGLE_COMPLETE':
+        case 'TOGGLE_COMPLETE':
+            return state.map((post) => post.id === action.id ? {...post, isComplete: !post.isComplete} : post)
         default:
           return state;
     }

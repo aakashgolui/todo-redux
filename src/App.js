@@ -46,13 +46,17 @@ class App extends React.Component{
       content:e.target.value
     })
   }
+
+  onToggleComplete = (id) => {
+    this.props.dispatch({ type: 'TOGGLE_COMPLETE', id:id})
+  }
   
   render(){
     return(
       <div className="container">
         <h3 className="center blue-text">Todo's</h3>
         <Suspense fallback={<h3 className="center">Loading...</h3>}>
-          <Todos posts={this.props.posts} deleteTodo={this.deleteTodo} onToggleFav={this.onToggleFav} onFocusInput={this.onFocusInput} toggleEdit={this.toggleEdit} handleChange={this.handleChange} handleSubmitEdit={this.handleSubmitEdit}/>
+          <Todos posts={this.props.posts} deleteTodo={this.deleteTodo} onToggleFav={this.onToggleFav} onFocusInput={this.onFocusInput} onToggleComplete={this.onToggleComplete} toggleEdit={this.toggleEdit} handleChange={this.handleChange} handleSubmitEdit={this.handleSubmitEdit}/>
           <AddForm />
         </Suspense>
       </div>
