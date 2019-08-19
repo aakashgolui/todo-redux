@@ -54,10 +54,17 @@ class App extends React.Component{
   render(){
     return(
       <div className="container">
-        <h3 className="center blue-text">Todo's</h3>
+        
+        
+        
         <Suspense fallback={<h3 className="center">Loading...</h3>}>
-          <Todos posts={this.props.posts} deleteTodo={this.deleteTodo} onToggleFav={this.onToggleFav} onFocusInput={this.onFocusInput} onToggleComplete={this.onToggleComplete} toggleEdit={this.toggleEdit} handleChange={this.handleChange} handleSubmitEdit={this.handleSubmitEdit}/>
+          <h3 className="center blue-text">Todo App</h3>
           <AddForm />
+          <p className="grey-text center">Total: ({this.props.posts.length}), Complete: ({this.props.posts.filter((post) => post.isComplete).length}), Fav: ({this.props.posts.filter((post) => post.isFav).length})</p>
+          {/* <h4 className="center blue-text">Todo's</h4> */}
+          
+          <Todos posts={this.props.posts} deleteTodo={this.deleteTodo} onToggleFav={this.onToggleFav} onFocusInput={this.onFocusInput} onToggleComplete={this.onToggleComplete} toggleEdit={this.toggleEdit} handleChange={this.handleChange} handleSubmitEdit={this.handleSubmitEdit}/>
+          
         </Suspense>
       </div>
     )
