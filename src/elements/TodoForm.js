@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
 class AddForm extends React.Component{
     state={
-        content:''
+        content:'',
+        
     }
 
     handleChange = (e) =>{ 
@@ -49,6 +51,7 @@ class AddForm extends React.Component{
             <form onSubmit={this.handleSubmit}>
                 <label>Add new todo:</label>
                 <input type="text" onChange={this.handleChange} value={this.state.content} />
+                
             </form>
         )
     }

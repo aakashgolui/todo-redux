@@ -1,10 +1,15 @@
 import React,{Suspense} from 'react';
 import { connect } from 'react-redux';
+import SweetAlert from 'sweetalert-react';
+import '../node_modules/sweetalert/dist/sweetalert.css'
 const Todos = React.lazy(() => import('./elements/TodoList'));
 const AddForm = React.lazy(() => import('./elements/TodoForm'));
 class App extends React.Component{
   state={
-    content:''
+    content:'',
+    alertTitle:'',
+    alertDesc:'',
+    showAlert:false
   }
   deleteTodo = (id) => {
     let result = window.confirm("Want to delete?");
@@ -12,12 +17,12 @@ class App extends React.Component{
       this.props.dispatch({
         type: 'DELETE_POST',
         id:id
-      })
+      },this.setState({showAlert:true, alertTitle:'Success', alertDesc:'Your todo is deleted successfully!'}))
     }
   }
 
   toggleEdit = (id) => {
-    console.log(id);
+    // console.log(id);
     this.props.dispatch({
       type: 'TOGGLE_EDIT_POST',
       id:id
@@ -30,8 +35,8 @@ class App extends React.Component{
     const data ={
       newContent
     }
-    console.log(data)
-    this.props.dispatch({ type: 'UPDATE', id:id, data: data })
+    // console.log(data)
+    this.props.dispatch({ type: 'UPDATE', id:id, data: data }, this.setState({showAlert:true, alertTitle:'Yey!', alertDesc:'Your todo is updated successfully!'}))
   }
 
   handleChange = (e) =>{ 
@@ -51,7 +56,7 @@ class App extends React.Component{
   }
 
   onToggleComplete = (id) => {
-    this.props.dispatch({ type: 'TOGGLE_COMPLETE', id:id})
+    this.props.dispatch({ type: 'TOGGLE_COMPLETE', id:id}, this.setState({showAlert:true, alertTitle:'Excellent', alertDesc:'You are amazing. Lets complete all.' }))
   }
 
   
@@ -68,7 +73,12 @@ class App extends React.Component{
           {/* <h4 className="center blue-text">Todo's</h4> */}
           
           <Todos posts={this.props.posts} deleteTodo={this.deleteTodo} onToggleFav={this.onToggleFav} onFocusInput={this.onFocusInput} onToggleComplete={this.onToggleComplete} toggleEdit={this.toggleEdit} handleChange={this.handleChange} handleSubmitEdit={this.handleSubmitEdit}/>
-          
+          <SweetAlert
+              show={this.state.showAlert}
+              title={this.state.alertTitle}
+              text={this.state.alertDesc}
+              onConfirm={() => this.setState({ showAlert: false })}
+          />
         </Suspense>
       </div>
     )
